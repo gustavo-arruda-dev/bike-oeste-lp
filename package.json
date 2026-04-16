@@ -1,0 +1,13 @@
+{
+  "name": "bike-oeste-lp",
+  "version": "1.0.0",
+  "description": "Landing Page – Bike Oeste Distribuidora",
+  "private": true,
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static site — no build needed'"
+  }
+}

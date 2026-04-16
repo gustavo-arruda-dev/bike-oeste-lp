@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Obrigado! – Bike Oeste</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Inter+Tight:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    @font-face {
+      font-family: 'Mona Sans';
+      src: url('assets/MonaSans.woff2') format('woff2');
+      font-weight: 100 900;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #000c5e;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+      padding: 40px 24px;
+    }
+    .card {
+      background: #fff;
+      border-radius: 20px;
+      padding: 60px 56px;
+      max-width: 640px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 60px rgba(0,0,0,0.3);
+    }
+    .logo {
+      height: 80px;
+      margin-bottom: 32px;
+    }
+    .emoji { font-size: 64px; margin-bottom: 24px; display: block; }
+    h1 {
+      font-family: 'Mona Sans', sans-serif;
+      font-size: clamp(28px, 5vw, 44px);
+      font-weight: 600;
+      color: #000c5e;
+      margin-bottom: 16px;
+      line-height: 1.1;
+    }
+    p {
+      font-size: 18px;
+      font-weight: 300;
+      color: #52586e;
+      line-height: 1.55;
+      margin-bottom: 36px;
+    }
+    .btn {
+      display: inline-block;
+      background: #25d366;
+      color: #fff;
+      padding: 16px 36px;
+      border-radius: 8px;
+      font-size: 17px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .btn:hover { opacity: 0.9; }
+    .back {
+      display: block;
+      margin-top: 20px;
+      font-size: 14px;
+      color: #aaa;
+      text-decoration: none;
+    }
+    .back:hover { color: #000c5e; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img src="assets/logo.png" alt="Bike Oeste" class="logo" />
+    <span class="emoji">🎉</span>
+    <h1>Recebemos seu cadastro!</h1>
+    <p>
+      Em menos de 24h nossa equipe vai entrar em contato com a sua tabela de preços exclusiva e acesso ao catálogo completo.
+    </p>
+    <a href="https://wa.me/551141864579?text=Ol%C3%A1%2C%20acabei%20de%20me%20cadastrar%20na%20LP%20e%20quero%20receber%20a%20tabela%20exclusiva%20da%20Bike%20Oeste!" class="btn" target="_blank" rel="noopener">
+      💬 Falar agora no WhatsApp
+    </a>
+    <a href="/" class="back">← Voltar para o início</a>
+  </div>
+</body>
+</html>
