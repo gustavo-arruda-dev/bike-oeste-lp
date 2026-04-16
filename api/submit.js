@@ -1,13 +1,12 @@
 // Vercel Serverless Function — POST /api/submit
-// Receives lead data and can integrate with email/CRM/webhook
-// Configure LEADS_WEBHOOK_URL in Vercel Environment Variables
+// Configure LEADS_WEBHOOK_URL nas variáveis de ambiente do Vercel
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
-  const { nome, whatsapp, empresa, cidade } = req.body;
+  const { nome, whatsapp, empresa, cidade } = req.body || {};
 
   if (!nome || !whatsapp || !empresa || !cidade) {
     return res.status(400).json({ error: 'Campos obrigatórios faltando.' });
@@ -24,7 +23,7 @@ export default async function handler(req, res) {
 
   console.log('[LEAD]', JSON.stringify(lead));
 
-  // ── Opcional: enviar para webhook (ex: n8n, Zapier, Make) ──
+  // ── Opcional: webhook (n8n, Zapier, Make) ──
   const webhookUrl = process.env.LEADS_WEBHOOK_URL;
   if (webhookUrl) {
     try {
@@ -38,5 +37,5 @@ export default async function handler(req, res) {
     }
   }
 
-  return res.status(200).json({ success: true, message: 'Lead recebido com sucesso!' });
-}
+  return res.status(200).json({ success: true });
+};
