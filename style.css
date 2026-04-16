@@ -36,7 +36,7 @@ body {
 
 /*
   Container: max-width 1184px
-  At 1920px viewport: (1920 - 1184) / 2 = 368px margins — matches Figma exactly
+  (1920 - 1184) / 2 = 368px → margens exatas do Figma
 */
 .container {
   max-width: 1184px;
@@ -48,13 +48,15 @@ body {
 
 /* ======================================================
    HERO
-   Figma: h=964px → 50.208vw | canvas 1920px → 1vw = 19.2px
+   Figma: h≈964px → 50.208vw | 1vw = 19.2px
+   Form card dentro do hero: left=1028px=53.542vw, top=78px=4.063vw
+                              w=552px=28.75vw, h=767px=39.948vw
 ====================================================== */
 .hero {
   position: relative;
   background: var(--navy);
   height: 50.208vw; /* 964px */
-  min-height: 580px;
+  min-height: 680px;
   overflow: hidden;
 }
 
@@ -79,7 +81,7 @@ body {
   z-index: 1;
 }
 
-/* Hero elements: absolutely positioned at Figma coordinates (px / 19.2 = vw) */
+/* ── Coluna esquerda: elementos de texto ── */
 .hero__logo {
   position: absolute;
   z-index: 2;
@@ -93,8 +95,8 @@ body {
 .hero__badge {
   position: absolute;
   z-index: 2;
-  left: 19.167vw;  /* 368px */
-  top: 14.740vw;   /* ~283px: below logo (60px tall) + gap */
+  left: 19.167vw;
+  top: 14.740vw;   /* ~283px */
   font-family: 'Inter', sans-serif;
   font-size: clamp(9px, 0.651vw, 12.5px);
   font-weight: 300;
@@ -110,20 +112,16 @@ body {
   left: 19.167vw;  /* 368px */
   top: 20.104vw;   /* 386px */
   font-family: 'Inter Tight', sans-serif;
-  font-size: clamp(28px, 2.945vw, 56.557px);
+  font-size: clamp(26px, 2.945vw, 56.557px);
   font-weight: 400;
   color: var(--white);
   line-height: 1.08;
   letter-spacing: -0.03em;
-  max-width: 42vw; /* largo o suficiente para não quebrar linha em nenhum viewport */
+  max-width: 42vw; /* largo o suficiente para não quebrar linha */
 }
 
 .hero__headline strong { font-weight: 700; }
-
-.hero__headline--blue {
-  color: var(--blue);
-  font-weight: 400;
-}
+.hero__headline--blue  { color: var(--blue); font-weight: 400; }
 
 .hero__subtext {
   position: absolute;
@@ -131,16 +129,124 @@ body {
   left: 19.167vw;  /* 368px */
   top: 34.635vw;   /* 665px */
   font-family: 'Inter', sans-serif;
-  font-size: clamp(14px, 1.302vw, 25px);
+  font-size: clamp(13px, 1.302vw, 25px);
   font-weight: 300;
   color: rgba(255,255,255,0.85);
   line-height: 1.55;
-  max-width: 32vw; /* ~614px */
+  max-width: 32vw;
 }
 
+/* ── Coluna direita: form card no hero ── */
+/* Figma: left=1028px=53.542vw, top=78px=4.063vw, w=552px=28.75vw */
+.hero__form-card {
+  position: absolute;
+  z-index: 3;
+  left: 53.542vw;  /* 1028px */
+  top: 4.063vw;    /* 78px */
+  width: 28.75vw;  /* 552px */
+  min-width: 300px;
+  background: var(--white);
+  border-radius: 1.042vw; /* ~20px */
+  padding: 2.083vw 2.083vw 1.875vw; /* 40px 40px 36px */
+  box-shadow: 0 8px 60px rgba(0,0,0,0.32);
+}
+
+.form-card__title {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(16px, 1.563vw, 30px);
+  font-weight: 400;
+  color: var(--navy);
+  margin-bottom: 1.25vw;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.form-card__title strong { font-weight: 700; }
+
+.form-card__form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625vw; /* 12px */
+}
+
+.form-field { display: flex; flex-direction: column; gap: 0.26vw; }
+
+.form-field__label {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(11px, 0.729vw, 14px);
+  font-weight: 400;
+  color: #52586e;
+}
+
+.form-field__required {
+  color: #e41e17;
+  font-family: 'Inria Sans', serif;
+  font-weight: 700;
+}
+
+/* Input: h=53px=2.760vw, r=6.37px=0.332vw */
+.form-field__input {
+  background: #f1f1f1;
+  border: none;
+  border-radius: 0.332vw; /* 6.37px */
+  padding: 0 0.833vw;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(12px, 0.729vw, 14px);
+  color: var(--dark-text);
+  outline: none;
+  transition: box-shadow 0.2s;
+  height: 2.760vw; /* 53px */
+  min-height: 40px;
+  width: 100%;
+}
+
+.form-field__input:focus { box-shadow: 0 0 0 2px var(--blue); }
+
+/* Botão: h=62px=3.229vw, r=31.13px=1.621vw */
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(12px, 0.833vw, 16px);
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+  transition: opacity 0.2s, transform 0.1s;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+
+.btn:hover  { opacity: 0.9; transform: translateY(-1px); }
+.btn:active { transform: translateY(0); }
+
+.btn--primary {
+  background: var(--blue);
+  color: var(--off-white);
+  height: 3.229vw; /* 62px */
+  min-height: 46px;
+  border-radius: 1.621vw; /* 31.13px — pill */
+  margin-top: 0.417vw;
+}
+
+.form-card__footnote {
+  font-family: 'Inter Tight', sans-serif;
+  font-size: clamp(10px, 0.677vw, 13px);
+  font-weight: 400;
+  color: #52586e;
+  text-align: center;
+  line-height: 1.55;
+  margin-top: 0.625vw;
+}
+
+.form-card__footnote strong { font-weight: 700; }
+
+/* Seta de scroll */
 .hero__scroll-indicator {
   position: absolute;
-  bottom: 1.875vw; /* 36px */
+  bottom: 1.875vw;
   left: 50%;
   transform: translateX(-50%);
   z-index: 2;
@@ -153,52 +259,52 @@ body {
 }
 
 /* ======================================================
-   TICKER
+   TICKER — fundo BRANCO, texto estático centrado
+   Figma: Inter 24px, color=#0a0e2a, 4 linhas centralizadas
 ====================================================== */
 .ticker {
-  background: var(--navy);
-  padding: 1.875vw 0; /* 36px */
-  overflow: hidden;
-  border-top: 1px solid rgba(255,255,255,0.1);
+  background: var(--white);
+  padding: 2.604vw 0 2.083vw; /* 50px 40px */
+  text-align: center;
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
 
-.ticker__track {
+.ticker__list {
+  list-style: none;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 2.5vw;
-  width: max-content;
-  animation: ticker-scroll 40s linear infinite;
-  white-space: nowrap;
+  gap: 0.521vw; /* 10px */
 }
 
-.ticker__track span {
+.ticker__list li {
   font-family: 'Inter', sans-serif;
   font-size: clamp(14px, 1.25vw, 24px); /* 24px */
   font-weight: 400;
-  color: var(--white);
-  flex-shrink: 0;
+  color: var(--dark-text);
+  line-height: 1.45;
 }
 
-.ticker__dot { color: var(--blue) !important; }
+.ticker__list li strong { font-weight: 700; }
+.ticker__blue { color: var(--blue); }
 
-@keyframes ticker-scroll {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+.ticker__note {
+  font-family: 'Inter', sans-serif;
+  font-size: clamp(10px, 0.729vw, 14px);
+  font-style: italic;
+  color: var(--dark-text);
+  opacity: 0.6;
+  margin-top: 0.833vw; /* 16px */
 }
 
 /* ======================================================
    PROBLEMA
    Figma: h=961px → 50.052vw
-   Content left=364px=18.958vw
-   Title top=111px=5.781vw, font-size=60px=3.125vw
-   List items top=500/543/586/629px
-   Highlight top=701px=36.510vw, font-size=45px=2.344vw
-   Blue mark under "de reposição rápida."
 ====================================================== */
 .problem {
   position: relative;
   background: var(--navy);
-  height: 50.052vw; /* 961px */
+  height: 50.052vw;
   min-height: 580px;
   overflow: hidden;
 }
@@ -226,13 +332,12 @@ body {
   z-index: 1;
 }
 
-/* Entire content block positioned at left=364px from canvas */
 .problem__content {
   position: absolute;
   z-index: 2;
   left: 18.958vw; /* 364px */
   top: 0;
-  width: 38vw; /* ~730px — stays in left half */
+  width: 38vw;
 }
 
 .problem__title {
@@ -240,7 +345,7 @@ body {
   top: 5.781vw;   /* 111px */
   left: 0;
   font-family: 'Mona Sans', sans-serif;
-  font-size: clamp(32px, 3.125vw, 60px);
+  font-size: clamp(30px, 3.125vw, 60px);
   font-weight: 700;
   color: var(--white);
   line-height: 1.05;
@@ -250,7 +355,7 @@ body {
 
 .problem__desc {
   position: absolute;
-  top: 13.021vw;  /* ~250px: below title (60px) + gap */
+  top: 13.021vw;
   left: 0;
   font-family: 'Inter', sans-serif;
   font-size: clamp(14px, 1.146vw, 22px);
@@ -262,7 +367,7 @@ body {
 
 .problem__subtitle {
   position: absolute;
-  top: 21.875vw;  /* ~420px */
+  top: 21.875vw;
   left: 0;
   font-family: 'Inter', sans-serif;
   font-size: clamp(14px, 1.25vw, 24px);
@@ -271,10 +376,9 @@ body {
   line-height: 1.3;
 }
 
-/* List items: top=500/543/586/629px, 43px apart (2.24vw) */
 .problem__list {
   position: absolute;
-  top: 26.042vw;  /* 500px */
+  top: 26.042vw; /* 500px */
   left: 0;
   list-style: none;
   display: flex;
@@ -286,8 +390,7 @@ body {
   font-size: clamp(13px, 0.990vw, 19px);
   font-weight: 400;
   color: rgba(255,255,255,0.88);
-  line-height: 1;
-  height: 2.24vw;  /* 43px — exact spacing from Figma */
+  height: 2.24vw;  /* 43px — espaçamento exato do Figma */
   min-height: 28px;
   display: flex;
   align-items: center;
@@ -295,13 +398,12 @@ body {
 
 .problem__list li strong { font-weight: 700; }
 
-/* Highlight: top=701px=36.510vw, font-size=45px=2.344vw */
 .problem__highlight {
   position: absolute;
-  top: 36.510vw;  /* 701px */
+  top: 36.510vw; /* 701px */
   left: 0;
   font-family: 'Mona Sans', sans-serif;
-  font-size: clamp(26px, 2.344vw, 45px);
+  font-size: clamp(24px, 2.344vw, 45px);
   font-weight: 400;
   color: var(--white);
   line-height: 1.15;
@@ -309,54 +411,41 @@ body {
 
 .problem__highlight strong { font-weight: 700; }
 
-/*
-  Blue mark: rect at left=422px (58px into content = 3.021vw),
-  top=810px within section = 73.427vw relative to highlight top (701px)
-  → 810-701=109px = 5.677vw below highlight top
-  width=359px=18.698vw, height=39px=2.031vw, bg=#007fff
-  Placed as background behind "de reposição rápida."
-*/
+/* Blue mark: fundo azul em "de reposição rápida." */
 .blue-mark {
-  position: relative;
-  display: inline;
   background: var(--blue);
   color: var(--white);
-  padding: 0.1em 0.2em;
+  padding: 0.1em 0.25em;
   border-radius: 0.2vw;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }
 
 /* ======================================================
-   SOLUÇÃO / BENEFÍCIOS
+   SOLUÇÃO
    Figma: h=1161px → 60.469vw
-   Benefit cards: left=355px=18.490vw, w=582px=30.313vw, h=100px=5.208vw
-   Step-01: left=1087px=56.615vw, top=249px=12.969vw, w=324px=16.875vw
-   Step-02: left=1385px=72.135vw, top=508px=26.458vw
-   Step-03: left=1181px=61.510vw, top=773px=40.260vw
 ====================================================== */
 .solution {
   position: relative;
   background: var(--white);
-  height: 60.469vw; /* 1161px */
+  height: 60.469vw;
   min-height: 760px;
   overflow: hidden;
 }
 
-/* Left column: title, desc, subtitle, benefit cards */
 .solution__left {
   position: absolute;
-  left: 18.490vw;  /* 355px */
+  left: 18.490vw; /* 355px */
   top: 0;
-  width: 30.313vw; /* 582px — matches card width */
+  width: 30.313vw; /* 582px */
 }
 
 .solution__title {
   position: absolute;
-  top: 3.125vw;   /* ~60px */
+  top: 3.125vw;
   left: 0;
   font-family: 'Mona Sans', sans-serif;
-  font-size: clamp(22px, 2.344vw, 45px);
+  font-size: clamp(20px, 2.344vw, 45px);
   font-weight: 400;
   color: var(--dark-text);
   line-height: 1.1;
@@ -369,7 +458,7 @@ body {
 
 .solution__desc {
   position: absolute;
-  top: 15.625vw;  /* ~300px */
+  top: 15.625vw;
   left: 0;
   font-family: 'Inter', sans-serif;
   font-size: clamp(13px, 1.042vw, 20px);
@@ -381,7 +470,7 @@ body {
 
 .solution__subtitle {
   position: absolute;
-  top: 24.479vw;  /* ~470px */
+  top: 24.479vw;
   left: 0;
   font-family: 'Inter', sans-serif;
   font-size: clamp(14px, 1.25vw, 24px);
@@ -390,31 +479,30 @@ body {
   letter-spacing: -0.02em;
 }
 
-/* Benefit cards: h=100px=5.208vw, stacked with 14px gap */
 .benefits {
   position: absolute;
-  top: 29.635vw;  /* 569px */
+  top: 29.635vw; /* 569px */
   left: 0;
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 0.729vw;  /* 14px */
+  gap: 0.729vw;
 }
 
 .benefit-card {
   display: flex;
   align-items: center;
-  gap: 1.25vw;   /* 24px */
+  gap: 1.25vw;
   background: var(--navy);
-  border-bottom: 0.26vw solid var(--blue); /* 5px */
-  border-radius: 0.417vw;  /* 8px */
-  padding: 0 1.354vw;      /* 0 26px */
-  height: 5.208vw;         /* 100px */
+  border-bottom: 0.26vw solid var(--blue);
+  border-radius: 0.417vw;
+  padding: 0 1.354vw;
+  height: 5.208vw; /* 100px */
   min-height: 60px;
 }
 
 .benefit-card__icon {
-  width: 1.771vw;  /* 34px */
+  width: 1.771vw;
   min-width: 20px;
   height: auto;
   flex-shrink: 0;
@@ -431,7 +519,6 @@ body {
 
 .benefit-card p strong { font-weight: 700; }
 
-/* Right column: step cards + connector SVG — absolutely positioned */
 .solution__right {
   position: absolute;
   left: 0;
@@ -443,8 +530,8 @@ body {
 
 .steps__label {
   position: absolute;
-  left: 56.615vw;  /* step-01 left = 1087px */
-  top: 10.469vw;   /* ~201px: above step-01 */
+  left: 56.615vw;
+  top: 10.469vw;
   font-family: 'Inter', sans-serif;
   font-size: clamp(14px, 1.25vw, 24px);
   font-weight: 600;
@@ -453,25 +540,22 @@ body {
   pointer-events: auto;
 }
 
-/* SVG connector: left=1067px=55.573vw, top=340px=17.708vw, w=601px=31.302vw, h=524px=27.292vw */
 .steps__connector {
   position: absolute;
-  left: 55.573vw;  /* 1067px */
-  top: 17.708vw;   /* 340px */
-  width: 31.302vw; /* 601px */
-  height: 27.292vw; /* 524px */
+  left: 55.573vw;
+  top: 17.708vw;
+  width: 31.302vw;
+  height: 27.292vw;
   pointer-events: none;
   z-index: 0;
 }
 
-/* Step cards: positioned at exact Figma coordinates */
-/* Step-01: left=1087px=56.615vw, top=249px=12.969vw, w=324px=16.875vw, h=182px=9.479vw */
 .step-card {
   position: absolute;
   display: flex;
   align-items: center;
   background: var(--step-blue);
-  border-radius: 1.458vw;  /* ~28px */
+  border-radius: 1.458vw;
   color: var(--white);
   z-index: 1;
   pointer-events: auto;
@@ -479,28 +563,26 @@ body {
 }
 
 .step-card--1 {
-  left: 56.615vw;   /* 1087px */
-  top: 12.969vw;    /* 249px */
-  width: 16.875vw;  /* 324px */
-  height: 9.479vw;  /* 182px */
-  min-width: 160px;
-  min-height: 80px;
-}
-
-/* Step-02: left=1385px=72.135vw, top=508px=26.458vw */
-.step-card--2 {
-  left: 72.135vw;   /* 1385px */
-  top: 26.458vw;    /* 508px */
-  width: 16.875vw;  /* same as step-01 */
+  left: 56.615vw;
+  top: 12.969vw;
+  width: 16.875vw;
   height: 9.479vw;
   min-width: 160px;
   min-height: 80px;
 }
 
-/* Step-03: left=1181px=61.510vw, top=773px=40.260vw */
+.step-card--2 {
+  left: 72.135vw;
+  top: 26.458vw;
+  width: 16.875vw;
+  height: 9.479vw;
+  min-width: 160px;
+  min-height: 80px;
+}
+
 .step-card--3 {
-  left: 61.510vw;   /* 1181px */
-  top: 40.260vw;    /* 773px */
+  left: 61.510vw;
+  top: 40.260vw;
   width: 16.875vw;
   height: 9.479vw;
   min-width: 160px;
@@ -509,11 +591,11 @@ body {
 
 .step-card__number {
   font-family: 'Inria Sans', serif;
-  font-size: clamp(44px, 5.208vw, 100px);
+  font-size: clamp(40px, 5.208vw, 100px);
   font-weight: 700;
   line-height: 1;
   color: var(--white);
-  min-width: clamp(60px, 4.688vw, 90px);
+  min-width: clamp(55px, 4.688vw, 90px);
   text-align: center;
   letter-spacing: -0.05em;
   flex-shrink: 0;
@@ -545,7 +627,7 @@ body {
 .steps__note {
   position: absolute;
   left: 56.615vw;
-  top: 52.083vw;   /* ~1000px: below step-03 + gap */
+  top: 52.083vw;
   font-family: 'Inter', sans-serif;
   font-size: clamp(10px, 0.729vw, 14px);
   font-style: italic;
@@ -560,7 +642,7 @@ body {
 .social-proof {
   position: relative;
   background: var(--navy);
-  padding: 5.729vw 0 4.167vw; /* 110px 80px */
+  padding: 5.729vw 0 4.167vw;
   overflow: hidden;
 }
 
@@ -577,11 +659,7 @@ body {
 .social-proof__overlay {
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    to right,
-    rgba(0,12,94,0.45) 0%,
-    var(--navy) 52%
-  );
+  background: linear-gradient(to right, rgba(0,12,94,0.45) 0%, var(--navy) 52%);
   z-index: 1;
 }
 
@@ -589,13 +667,13 @@ body {
 
 .social-proof__title {
   font-family: 'Mona Sans', sans-serif;
-  font-size: clamp(22px, 2.604vw, 50px);
+  font-size: clamp(20px, 2.604vw, 50px);
   font-weight: 400;
   color: var(--white);
   line-height: 1.2;
   max-width: 680px;
   margin-left: auto;
-  margin-bottom: 2.917vw; /* 56px */
+  margin-bottom: 2.917vw;
 }
 
 .social-proof__title strong { font-weight: 700; }
@@ -610,13 +688,13 @@ body {
 
 .testimonials-track {
   display: flex;
-  gap: 1.042vw; /* 20px */
+  gap: 1.042vw;
   width: max-content;
   animation: testimonials-scroll 55s linear infinite;
 }
 
 .testimonials-track img {
-  height: clamp(120px, 10.417vw, 200px);
+  height: clamp(100px, 10.417vw, 200px);
   width: auto;
   border-radius: 0.625vw;
   flex-shrink: 0;
@@ -645,10 +723,7 @@ body {
 
 /* ======================================================
    COMPARATIVO
-   Figma: h=1155px → 60.156vw
-   Table: left=390px=20.313vw, top=367px=19.115vw
-          w=1141px=59.427vw, h=588px=30.625vw
-          r=31.37px=1.634vw, bg=#000c5e
+   Figma: table border-radius=31.37px=1.634vw
 ====================================================== */
 .comparison {
   background: var(--white);
@@ -660,7 +735,7 @@ body {
   font-size: clamp(22px, 2.604vw, 50px);
   font-weight: 400;
   color: var(--dark-text);
-  margin-bottom: 3.125vw; /* 60px */
+  margin-bottom: 3.125vw;
   line-height: 1.15;
   text-align: center;
 }
@@ -670,7 +745,7 @@ body {
 
 .comparison-table {
   background: var(--navy);
-  border-radius: 1.634vw; /* 31.37px — exact from Figma */
+  border-radius: 1.634vw; /* 31.37px — exato do Figma */
   overflow: hidden;
 }
 
@@ -681,7 +756,7 @@ body {
 }
 
 .comparison-table__cell {
-  padding: 1.042vw 1.667vw; /* 20px 32px */
+  padding: 1.042vw 1.667vw;
   font-family: 'Inter', sans-serif;
   font-size: clamp(12px, 0.938vw, 18px);
   font-weight: 400;
@@ -690,7 +765,7 @@ body {
 }
 
 .comparison-table__header .comparison-table__cell {
-  padding: 1.458vw 1.667vw; /* 28px 32px */
+  padding: 1.458vw 1.667vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -698,9 +773,7 @@ body {
   text-align: center;
 }
 
-.comparison-table__header .comparison-table__cell--criteria {
-  background: transparent;
-}
+.comparison-table__header .comparison-table__cell--criteria { background: transparent; }
 
 .comparison-table__header .comparison-table__cell--others {
   border-left: 1px solid rgba(255,255,255,0.1);
@@ -710,7 +783,7 @@ body {
 .comparison-table__header .comparison-table__cell--bikeOeste {
   background: var(--highlight);
   border-left: 1px solid rgba(255,255,255,0.1);
-  border-radius: 0 1.634vw 0 0; /* top-right corner matches table radius */
+  border-radius: 0 1.634vw 0 0;
 }
 
 .comparison-table__logo {
@@ -719,9 +792,7 @@ body {
   object-fit: contain;
 }
 
-.comparison-table__row {
-  border-top: 1px solid rgba(255,255,255,0.1);
-}
+.comparison-table__row { border-top: 1px solid rgba(255,255,255,0.1); }
 
 .comparison-table__row--last .comparison-table__cell--bikeOeste {
   border-radius: 0 0 1.634vw 0;
@@ -745,183 +816,8 @@ body {
 }
 
 /* ======================================================
-   CTA + FORMULÁRIO
-   Figma: h=934px → 48.646vw
-   Form card: left=1028px=53.542vw, top=78px=4.063vw
-              w=552px=28.75vw, h=767px=39.948vw
-   Inputs: h=53px=2.760vw, r=6.37px
-   Button: h=62px=3.229vw, r=31.13px=1.621vw
-====================================================== */
-.cta-form {
-  position: relative;
-  background: var(--navy);
-  overflow: hidden;
-}
-
-.cta-form::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse at 75% 50%, rgba(0,127,255,0.08) 0%, transparent 60%);
-  z-index: 0;
-}
-
-.cta-form__inner {
-  position: relative;
-  z-index: 1;
-  max-width: 1184px;
-  margin: 0 auto;
-  padding: 4.063vw 20px; /* 78px top (matches form card top) */
-  display: grid;
-  grid-template-columns: 1fr 28.75vw; /* right col = form card width */
-  gap: 4.167vw;
-  align-items: start;
-  min-height: 48.646vw;
-}
-
-.cta-form__title {
-  font-family: 'Mona Sans', sans-serif;
-  font-size: clamp(22px, 2.344vw, 45px);
-  font-weight: 400;
-  color: var(--white);
-  line-height: 1.18;
-  margin-bottom: 1.458vw; /* 28px */
-}
-
-.cta-form__title strong { font-weight: 600; }
-.cta-form__title .blue  { color: var(--blue); }
-
-.cta-form__eyebrow {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(13px, 1.042vw, 20px);
-  font-weight: 500;
-  color: rgba(255,255,255,0.8);
-}
-
-.cta-form__perks {
-  list-style: none;
-  margin-top: 1.042vw; /* 20px */
-}
-
-.cta-form__perks li {
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(13px, 1.042vw, 20px);
-  font-weight: 400;
-  color: rgba(255,255,255,0.88);
-  line-height: 1.35;
-  padding: 0.833vw 0; /* 16px */
-  border-bottom: 1px solid rgba(255,255,255,0.15);
-}
-
-.cta-form__perks--last { border-bottom: none !important; }
-
-/* Form Card: w=552px=28.75vw, h=767px */
-.form-card {
-  background: var(--white);
-  border-radius: 1.042vw; /* 20px */
-  padding: 2.708vw 2.5vw; /* 52px 48px */
-  box-shadow: 0 8px 60px rgba(0,0,0,0.28);
-  width: 100%;
-}
-
-.form-card__title {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: clamp(18px, 1.875vw, 36px);
-  font-weight: 400;
-  color: var(--navy);
-  margin-bottom: 1.667vw; /* 32px */
-  line-height: 1.2;
-  text-align: center;
-}
-
-.form-card__title strong { font-weight: 700; }
-
-.form-card__form {
-  display: flex;
-  flex-direction: column;
-  gap: 0.833vw; /* 16px */
-}
-
-.form-field { display: flex; flex-direction: column; gap: 0.313vw; }
-
-.form-field__label {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: clamp(12px, 0.833vw, 16px);
-  font-weight: 400;
-  color: #52586e;
-}
-
-.form-field__required {
-  color: #e41e17;
-  font-family: 'Inria Sans', serif;
-  font-weight: 700;
-}
-
-/* Input: h=53px=2.760vw, r=6.37px */
-.form-field__input {
-  background: #f1f1f1;
-  border: none;
-  border-radius: 0.332vw; /* 6.37px */
-  padding: 0 0.938vw;
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(13px, 0.833vw, 16px);
-  color: var(--dark-text);
-  outline: none;
-  transition: box-shadow 0.2s;
-  height: 2.760vw; /* 53px */
-  min-height: 44px;
-  width: 100%;
-}
-
-.form-field__input:focus { box-shadow: 0 0 0 2px var(--blue); }
-
-/* Submit button: h=62px=3.229vw, r=31.13px=1.621vw */
-.btn {
-  display: block;
-  width: 100%;
-  font-family: 'Inter', sans-serif;
-  font-size: clamp(13px, 0.938vw, 18px);
-  font-weight: 600;
-  cursor: pointer;
-  border: none;
-  text-decoration: none;
-  transition: opacity 0.2s, transform 0.1s;
-  letter-spacing: -0.01em;
-  text-align: center;
-}
-
-.btn:hover  { opacity: 0.9; transform: translateY(-1px); }
-.btn:active { transform: translateY(0); }
-
-.btn--primary {
-  background: var(--blue);
-  color: var(--off-white);
-  height: 3.229vw; /* 62px */
-  min-height: 48px;
-  border-radius: 1.621vw; /* 31.13px — pill */
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.form-card__footnote {
-  font-family: 'Inter Tight', sans-serif;
-  font-size: clamp(11px, 0.781vw, 15px);
-  font-weight: 400;
-  color: #52586e;
-  text-align: center;
-  line-height: 1.55;
-  margin-top: 0.208vw;
-}
-
-.form-card__footnote strong { font-weight: 700; }
-
-/* ======================================================
    FAQ
-   Figma: h=984px → 51.25vw
-   Question headers: left=529px=27.552vw, w=862px=44.896vw
-                     h=59.5px=3.099vw, bg=#000c5e
+   Figma: question h=59.5px=3.099vw, max-width=862px=44.896vw
 ====================================================== */
 .faq {
   background: var(--white);
@@ -933,17 +829,16 @@ body {
   font-size: clamp(26px, 2.917vw, 56px);
   font-weight: 400;
   color: var(--dark-text);
-  margin-bottom: 2.708vw; /* 52px */
+  margin-bottom: 2.708vw;
   text-align: center;
 }
 
 .faq__title strong { font-weight: 700; }
 
-/* Max-width=862px=44.896vw centered */
 .faq__list {
   display: flex;
   flex-direction: column;
-  gap: 0.521vw; /* 10px */
+  gap: 0.521vw;
   max-width: 44.896vw;
   min-width: 300px;
   width: 100%;
@@ -952,7 +847,6 @@ body {
 
 .faq__item { border-radius: 0.625vw; overflow: hidden; }
 
-/* Question header: h=59.5px=3.099vw */
 .faq__question {
   width: 100%;
   display: flex;
@@ -961,7 +855,7 @@ body {
   gap: 0.833vw;
   background: var(--navy);
   color: var(--white);
-  padding: 0 1.667vw; /* 0 32px */
+  padding: 0 1.667vw;
   height: 3.099vw; /* 59.5px */
   min-height: 52px;
   border: none;
@@ -994,7 +888,7 @@ body {
 
 .faq__item--open .faq__answer {
   max-height: 300px;
-  padding: 1.146vw 1.667vw; /* 22px 32px */
+  padding: 1.146vw 1.667vw;
 }
 
 .faq__answer p {
@@ -1007,10 +901,7 @@ body {
 
 /* ======================================================
    FOOTER
-   Figma: h=397px → 20.677vw
-   Logo: left=340px=17.708vw, top=94px=4.896vw, w=236px=12.292vw
-   Tagline: font-size=18px=0.9375vw
-   Contacts: left=1214px=63.229vw, top=144px=7.5vw
+   Figma: logo w=236px=12.292vw, tagline 18px=0.9375vw
 ====================================================== */
 .footer {
   background: var(--navy);
@@ -1019,7 +910,7 @@ body {
 .footer__inner {
   max-width: 1184px;
   margin: 0 auto;
-  padding: 4.896vw 20px 2.083vw; /* 94px top, 40px bottom */
+  padding: 4.896vw 20px 2.083vw;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 3.125vw;
@@ -1037,7 +928,7 @@ body {
 
 .footer__tagline {
   font-family: 'Inter', sans-serif;
-  font-size: clamp(12px, 0.9375vw, 18px); /* 18px */
+  font-size: clamp(12px, 0.9375vw, 18px);
   font-weight: 300;
   color: rgba(255,255,255,0.7);
   line-height: 1.4;
@@ -1047,7 +938,7 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.042vw;
-  margin-top: 2.604vw; /* align with contacts left=1214 top=144: 144-94=50px below logo top */
+  margin-top: 2.604vw;
 }
 
 .footer__contact-row {
@@ -1068,8 +959,6 @@ body {
 
 .footer__contact-item svg { flex-shrink: 0; }
 
-.footer__divider { padding: 0; }
-
 .footer__hr {
   border: none;
   border-top: 1px solid rgba(255,255,255,0.12);
@@ -1077,62 +966,79 @@ body {
 }
 
 /* ======================================================
-   RESPONSIVE — mobile/tablet
+   RESPONSIVE
 ====================================================== */
 @media (max-width: 1024px) {
-  /* ---- Hero ---- */
+  /* Hero: empilha texto acima + form abaixo */
   .hero {
     height: auto;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
+    min-height: auto;
+    padding-bottom: 60px;
   }
 
   .hero__logo {
     position: relative;
     left: auto; top: auto;
-    width: clamp(140px, 36vw, 220px);
-    max-width: 220px;
-    margin: clamp(40px, 8vw, 80px) 0 0 clamp(20px, 6vw, 60px);
+    width: clamp(130px, 30vw, 200px);
+    max-width: 200px;
+    margin: clamp(36px, 7vw, 60px) 0 0 clamp(20px, 5vw, 40px);
   }
 
   .hero__badge {
     position: relative;
     left: auto; top: auto;
-    font-size: clamp(9px, 2.2vw, 12px);
-    margin: 12px 0 0 clamp(20px, 6vw, 60px);
+    font-size: clamp(9px, 2vw, 11px);
+    margin: 10px 0 0 clamp(20px, 5vw, 40px);
   }
 
   .hero__headline {
     position: relative;
     left: auto; top: auto;
-    font-size: clamp(28px, 6.5vw, 52px);
+    font-size: clamp(26px, 5.5vw, 46px);
     max-width: 90%;
-    margin: clamp(20px, 5vw, 40px) 0 0 clamp(20px, 6vw, 60px);
+    margin: clamp(16px, 4vw, 32px) 0 0 clamp(20px, 5vw, 40px);
   }
 
   .hero__subtext {
     position: relative;
     left: auto; top: auto;
-    font-size: clamp(14px, 3.5vw, 20px);
+    font-size: clamp(14px, 3vw, 18px);
     max-width: 90%;
-    margin: clamp(16px, 4vw, 28px) 0 clamp(60px, 12vw, 100px) clamp(20px, 6vw, 60px);
+    margin: clamp(14px, 3vw, 24px) 0 0 clamp(20px, 5vw, 40px);
   }
 
-  /* ---- Problem ---- */
+  .hero__form-card {
+    position: relative;
+    left: auto; top: auto;
+    width: calc(100% - clamp(40px, 10vw, 80px));
+    max-width: 500px;
+    margin: clamp(28px, 6vw, 48px) auto 0;
+    border-radius: 16px;
+    padding: 28px 24px;
+  }
+
+  .form-card__title { font-size: clamp(17px, 4vw, 26px); }
+  .form-card__form  { gap: 10px; }
+  .form-field__input { height: 46px; border-radius: 6px; font-size: 14px; }
+  .btn--primary { height: 50px; border-radius: 25px; font-size: 14px; }
+  .hero__scroll-indicator { display: none; }
+
+  /* Ticker */
+  .ticker { padding: 36px 20px; }
+  .ticker__list li { font-size: clamp(14px, 3.5vw, 20px); }
+
+  /* Problem */
   .problem {
     height: auto;
-    min-height: 600px;
-    padding: 60px 0;
+    min-height: 580px;
+    padding: 56px 0;
   }
 
   .problem__content {
     position: relative;
     left: auto; top: auto;
     width: auto;
-    max-width: none;
-    padding: 0 clamp(20px, 6vw, 60px);
+    padding: 0 clamp(20px, 5vw, 40px);
   }
 
   .problem__title,
@@ -1142,29 +1048,28 @@ body {
   .problem__highlight {
     position: relative;
     top: auto; left: auto;
-    width: auto;
-    max-width: 640px;
+    width: auto; max-width: 600px;
   }
 
-  .problem__title { font-size: clamp(30px, 6vw, 52px); margin-bottom: 24px; }
-  .problem__desc  { font-size: clamp(14px, 3vw, 20px); margin-bottom: 20px; }
-  .problem__subtitle { font-size: clamp(15px, 3.5vw, 22px); margin-bottom: 12px; }
-  .problem__list  { margin-bottom: 28px; }
-  .problem__list li { height: auto; min-height: 32px; font-size: clamp(13px, 3vw, 18px); margin-bottom: 8px; }
-  .problem__highlight { font-size: clamp(24px, 5.5vw, 40px); }
+  .problem__title    { font-size: clamp(28px, 6vw, 48px); margin-bottom: 20px; }
+  .problem__desc     { font-size: clamp(14px, 3vw, 18px); margin-bottom: 18px; }
+  .problem__subtitle { font-size: clamp(14px, 3.5vw, 20px); margin-bottom: 10px; }
+  .problem__list     { margin-bottom: 24px; }
+  .problem__list li  { height: auto; min-height: 30px; font-size: clamp(13px, 2.8vw, 17px); margin-bottom: 8px; }
+  .problem__highlight { font-size: clamp(22px, 5vw, 36px); }
 
-  /* ---- Solution ---- */
+  /* Solution */
   .solution {
     height: auto;
     min-height: auto;
-    padding: 60px 0 80px;
+    padding: 56px 0 72px;
   }
 
   .solution__left {
     position: relative;
     left: auto; top: auto;
     width: auto;
-    padding: 0 clamp(20px, 6vw, 60px);
+    padding: 0 clamp(20px, 5vw, 40px);
   }
 
   .solution__title,
@@ -1176,101 +1081,46 @@ body {
     width: auto;
   }
 
-  .solution__title { font-size: clamp(22px, 5vw, 44px); margin-bottom: 20px; }
-  .solution__desc  { font-size: clamp(13px, 3vw, 20px); margin-bottom: 16px; }
-  .solution__subtitle { font-size: clamp(14px, 3.5vw, 22px); margin-bottom: 12px; }
+  .solution__title { font-size: clamp(20px, 4.5vw, 38px); margin-bottom: 16px; }
+  .solution__desc  { font-size: clamp(13px, 3vw, 18px); margin-bottom: 14px; }
+  .solution__subtitle { font-size: clamp(14px, 3vw, 20px); margin-bottom: 10px; }
+  .benefits { gap: 8px; }
+  .benefit-card { height: auto; min-height: 64px; padding: 12px 18px; border-radius: 8px; gap: 14px; }
+  .benefit-card__icon { width: 26px; }
+  .benefit-card p { font-size: clamp(12px, 2.8vw, 17px); }
 
-  .benefits { gap: 10px; }
-
-  .benefit-card {
-    height: auto;
-    min-height: 72px;
-    padding: 14px 20px;
-    border-radius: 8px;
-    gap: 16px;
-  }
-
-  .benefit-card__icon { width: 28px; }
-  .benefit-card p { font-size: clamp(13px, 3vw, 18px); }
-
-  /* Steps: reflow to vertical */
   .solution__right {
     position: relative;
     left: auto; top: auto;
-    width: auto;
-    height: auto;
-    padding: 48px clamp(20px, 6vw, 60px) 0;
+    width: auto; height: auto;
+    padding: 40px clamp(20px, 5vw, 40px) 0;
     pointer-events: auto;
   }
 
-  .steps__label {
-    position: relative;
-    left: auto; top: auto;
-    font-size: clamp(16px, 4vw, 24px);
-    margin-bottom: 20px;
-  }
-
+  .steps__label { position: relative; left: auto; top: auto; font-size: clamp(15px, 3.5vw, 22px); margin-bottom: 16px; }
   .steps__connector { display: none; }
 
   .step-card {
-    position: relative;
-    left: auto !important;
-    top: auto !important;
-    width: 100% !important;
-    height: auto !important;
-    min-height: 80px;
-    margin-bottom: 12px;
-    border-radius: 20px;
+    position: relative !important;
+    left: auto !important; top: auto !important;
+    width: 100% !important; height: auto !important;
+    min-height: 76px;
+    margin-bottom: 10px;
+    border-radius: 18px;
   }
 
-  .step-card__number { font-size: clamp(52px, 12vw, 80px); min-width: 80px; padding-left: 16px; }
-  .step-card__info strong { font-size: clamp(14px, 4vw, 20px); }
-  .step-card__info span   { font-size: clamp(12px, 3vw, 16px); }
+  .step-card__number { font-size: clamp(44px, 10vw, 72px); min-width: 72px; padding-left: 14px; }
+  .step-card__info strong { font-size: clamp(13px, 3.5vw, 18px); }
+  .step-card__info span   { font-size: clamp(11px, 2.5vw, 14px); }
 
-  .steps__note {
-    position: relative;
-    left: auto; top: auto;
-    margin-top: 8px;
-    font-size: clamp(11px, 2.5vw, 14px);
-  }
+  .steps__note { position: relative; left: auto; top: auto; margin-top: 6px; font-size: 12px; }
 
-  /* ---- Form ---- */
-  .cta-form__inner {
-    grid-template-columns: 1fr;
-    padding: 60px 20px;
-    min-height: auto;
-    gap: 40px;
-  }
-
-  .btn--primary { height: 52px; border-radius: 26px; }
-  .form-field__input { height: 48px; border-radius: 8px; }
-
-  .form-card { padding: 36px 24px; border-radius: 16px; }
-  .form-card__title { font-size: clamp(18px, 4.5vw, 30px); }
-
-  /* ---- FAQ ---- */
-  .faq__list { max-width: none; }
-
-  .faq__question {
-    height: auto;
-    min-height: 52px;
-    padding: 16px 20px;
-    font-size: clamp(14px, 3.5vw, 19px);
-  }
-
-  .faq__item--open .faq__answer { padding: 16px 20px; }
-
-  /* ---- Footer ---- */
-  .footer__inner {
-    grid-template-columns: 1fr;
-    padding: 48px 20px 32px;
-    gap: 32px;
-  }
-
-  .footer__logo { width: clamp(140px, 36vw, 200px); max-width: 200px; }
-  .footer__tagline { font-size: clamp(12px, 3vw, 16px); }
+  /* Footer */
+  .footer__inner { grid-template-columns: 1fr; padding: 44px 20px 28px; gap: 28px; }
+  .footer__logo  { width: clamp(130px, 30vw, 190px); max-width: 190px; }
+  .footer__tagline { font-size: clamp(12px, 2.8vw, 15px); }
   .footer__contact { margin-top: 0; }
-  .footer__contact-item { font-size: clamp(13px, 3vw, 15px); }
+  .footer__contact-item { font-size: clamp(12px, 2.8vw, 14px); }
   .footer__hr { margin: 0 20px; }
 }
 
@@ -1278,10 +1128,10 @@ body {
   .comparison-table__header,
   .comparison-table__row { grid-template-columns: 1fr 1.25fr; }
   .comparison-table__cell--criteria { display: none; }
-
   .footer__contact-row { grid-template-columns: 1fr; }
-  .cta-form__inner { padding: 48px 16px; }
-  .form-card { padding: 28px 16px; }
+  .faq__list { max-width: none; }
+  .faq__question { height: auto; min-height: 52px; padding: 14px 18px; font-size: 14px; }
+  .faq__item--open .faq__answer { padding: 14px 18px; }
 }
 
 @media (max-width: 400px) {
