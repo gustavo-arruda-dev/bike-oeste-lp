@@ -115,7 +115,7 @@ body {
   color: var(--white);
   line-height: 1.08;
   letter-spacing: -0.03em;
-  max-width: 32vw;
+  max-width: 42vw; /* largo o suficiente para não quebrar linha em nenhum viewport */
 }
 
 .hero__headline strong { font-weight: 700; }
@@ -135,7 +135,7 @@ body {
   font-weight: 300;
   color: rgba(255,255,255,0.85);
   line-height: 1.55;
-  max-width: 27.604vw; /* ~530px */
+  max-width: 32vw; /* ~614px */
 }
 
 .hero__scroll-indicator {
